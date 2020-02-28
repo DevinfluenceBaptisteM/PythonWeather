@@ -7,7 +7,7 @@ api = Api(app=app, version='0.1', title='meteo Api', description='', validate=Tr
 ns = api.namespace('meteos', description=' ')
 
 dbclient = MongoClient("mongodb://localhost:27010")
-collection = dbclient.meteo
+collection = dbclient.meteo.collection
 
 model = api.model('meteo',{
     'id_station': fields.String(readonly=True),
@@ -36,7 +36,7 @@ class List(Resource):
     @ns.expect(model)
     @ns.marshal_with(model, code=201)
     def post(self):
-        id_res = collection.insert_one(api.api_payload).inserted_id
+        id_res = collection.insert_one(api.payload).inserted_id
         result = collection.find_one({"_id" : id_res}, {"_id" : 0})
         return result
 
