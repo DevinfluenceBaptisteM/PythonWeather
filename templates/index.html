@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <button id="update_chart">MODIFIER</button>
+  <canvas id="myChart"></canvas>
+</body>
+<script src="{{url_for('static', filename='coin_chart.js')}}"></script>
+<script>
+  function sleep(ms) {
+    return new  Promise(resolve => setTimeout(resolve,ms));
+  }
+
+  const coin_chart = new Graph_coin();
+  document.getElementById("update_chart").addEventListener("click", () => {
+    coin_chart.reste_chart();
+  });
+
+  document.addEventListener(("DOMContentLoaded", async function (event) {
+    while (true){
+      await sleep(120000);
+      const coin_chart = new Graph_coin();
+      console.log("updated:" + moment().format());
+    }
+
+  }));
+
+</script>
+</html>

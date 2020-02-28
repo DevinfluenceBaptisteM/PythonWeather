@@ -1,0 +1,5 @@
+Flask
+Werkzeug == 0.16.1
+flask-restx
+pymongo
+request
